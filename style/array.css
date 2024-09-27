@@ -1,0 +1,18 @@
+.card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 150px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* A hover effect for interactivity */
+}
+.list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
