@@ -24,8 +24,6 @@ products.forEach(product => { let card = document.createElement('div');
  
 })
 }
-
-
 displaydata();
 
 
