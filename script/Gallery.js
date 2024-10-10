@@ -1,50 +1,12 @@
-//load image
+let galleryIamge = []; // Initialize as an empty array
 
-
-
-
-let galleryIamge = [{
-
-    id: 1,
-    src: "../image/11120556_fi_brands_airbnb_icon.png",
-    title:"AirBNB",
-    Description: "Worlds Best Accomodation"
-},
-{
-    id: 2,
-    src: "../image/7123025_logo_google_g_icon.png",
-    title:"Google",
-    Description: "Worlds Best Company"
-},
-{
-    id: 3,
-    src: "../image/7123025_logo_google_g_icon.png",
-    title:"Google",
-    Description: "Worlds Best Company"
-}
-,{
-    id: 4,
-    src: "../image/7123025_logo_google_g_icon.png",
-    title:"Google",
-    Description: "Worlds Best Company"
-}
-,{
-    id: 5,
-    src: "../image/7123025_logo_google_g_icon.png",
-    title:"Google",
-    Description: "Worlds Best Company"
-}
-
-
-
-]
 function loadGallery() {
     // Check if galleryList exists
     let galleryContainer = document.getElementById('galleryList');
     
     // Retrieve gallery data from localStorage
     let storedGallery = localStorage.getItem('galleryData');
-    let galleryIamge = storedGallery ? JSON.parse(storedGallery) : [];
+    galleryIamge = storedGallery ? JSON.parse(storedGallery) : []; // Use stored data if available
     
     if (galleryContainer && galleryIamge.length > 0) {
         // Clear previous content
@@ -83,8 +45,6 @@ function loadGallery() {
 
 loadGallery();
 
-
-
 function formLoad(){
     let form = document.getElementById("arrayForm");
     if (form) {
@@ -104,13 +64,20 @@ function formLoad(){
                 
                 // Push the new gallery item into the array
                 galleryIamge.push(formObjectData);
-
-                // Save the updated gallery array to localStorage
-                localStorage.setItem('galleryData', JSON.stringify(galleryIamge));
-
                 console.log(galleryIamge);
+                
+                // Save the updated gallery array to localStorage
+                const sizeLimit = 5 * 1024 * 1024;
+                let item = JSON.stringify(galleryIamge);
+                if (item.length < sizeLimit) {
+                    localStorage.setItem('galleryData', item);
+                    console.log('Data stored successfully');
+                } else {
+                    console.error('Data too large to store in localStorage');
+                }
 
                 form.reset();
+                loadGallery(); // Reload the gallery to display new item
             };
 
             // Read the image as a DataURL
